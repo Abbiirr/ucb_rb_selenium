@@ -3,7 +3,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-os.environ['PATH'] += r"C:\Users\abirh\Downloads\Compressed\chromedriver_win32"
+os.environ['PATH'] += r"C:\chromedriver_win32"
 driver = webdriver.Chrome()
 driver.get("http://localhost:7082/login.html#!")
 driver.maximize_window()
@@ -19,20 +19,29 @@ time.sleep(3)
 
 closeButton = driver.find_element(By.CSS_SELECTOR, "#lastLogin > div > div > div.modal-footer > button")
 closeButton.click()
-time.sleep(2)
+# time.sleep(2)
 
 fundTransferButton = driver.find_element(By.CSS_SELECTOR, "#navbarSupportedContent > ul > li:nth-child(2) > a")
 fundTransferButton.click()
-time.sleep(2)
+# time.sleep(2)
 
 swadhinFundTransfer = driver.find_element(By.ID, "fundtransfer341106")
 swadhinFundTransfer.click()
-time.sleep(2)
+# time.sleep(2)
 
 ownSwadhinFundTransferToggle = driver.find_element(By.CSS_SELECTOR, "#fund-transfer > div > div.row.justify-content-center > div.col-md-10.currency-center > div > div > div > label:nth-child(2)")
-
-# ownSwadhinFundTransferToggle.value_of_css_property("background-color")
 print(ownSwadhinFundTransferToggle.value_of_css_property("background-color"))
 
 otherSwadhinFundTransferToggle = driver.find_element(By.CSS_SELECTOR, "#fund-transfer > div > div.row.justify-content-center > div.col-md-10.currency-center > div > div > div > label:nth-child(4)")
 print(otherSwadhinFundTransferToggle.value_of_css_property("background-color"))
+
+
+fundTransferLabel = driver.find_element(By.ID, "swadin-account-fund")
+assert fundTransferLabel.text == "SWADHIN TO OWN ACOCUNT FT"
+
+otherSwadhinFundTransferToggle.click()
+
+assert fundTransferLabel.text == "SWADHIN TO OTHER ACCOUNT FT"
+
+
+
